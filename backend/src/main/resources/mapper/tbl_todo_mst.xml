@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Mapper for tbl project   -->
+<mapper namespace="com.what_to_do.backend.Todo.TodoDao">
+
+    <!-- getAllTodo --> 
+
+    <select id="getAllTodo">
+        SELECT * FROM what_to_do_db.tbl_todo_mst
+        WHERE isCompleted = false;
+    </select>
+
+    <!-- addTodo --> 
+
+    <insert id="addTodo" parameterType="com.what_to_do.backend.Todo.TodoModel">
+        INSERT INTO tbl_todo_mst (title, isCompleted, created_at, updated_at)
+        VALUES (#{title}, FALSE, NOW(), NULL);
+    </insert>
+
+    <!-- markTodoComplete --> 
+
+    <update id="markTodoComplete" parameterType="long">
+        UPDATE tbl_todo_mst
+        SET isCompleted = true
+        WHERE todo_id = #{todo_id};
+    </update>
+</mapper>
